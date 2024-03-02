@@ -52,5 +52,19 @@ namespace MVC_dulciuri
                 Console.WriteLine(x.DulciuriInfo());
             }
         }
+
+        //CRUD
+        public bool EditSweetType(string tipDulce, string newCandy)
+        {
+            foreach (Dulciuri x in DulciuriList)
+            {
+                if (x.tipDulce == tipDulce)
+                {
+                    x.tipDulce = newCandy; 
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
