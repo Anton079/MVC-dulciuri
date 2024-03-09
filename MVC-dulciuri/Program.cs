@@ -8,6 +8,16 @@ internal class Program
 
         service.LoadData();
 
+        Dulciuri dulciuri = new Dulciuri();
+        dulciuri.gramaj = 100;
+        dulciuri.tipDulce = "Mentosane";
+        dulciuri.pret = 10;
+        bool t = service.AddDulciuriinList(dulciuri);
+        Console.WriteLine(t);
+
         service.AfisareDulciuri();
+
+        bool j = service.RemoveDulciuriByDenumire(Produs1);
+        Console.WriteLine(j);
     }
 }

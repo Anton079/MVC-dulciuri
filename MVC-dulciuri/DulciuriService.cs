@@ -45,6 +45,8 @@ namespace MVC_dulciuri
 
         }
 
+
+        //CRUD
         public void AfisareDulciuri()
         {
             foreach(Dulciuri x in DulciuriList)
@@ -53,18 +55,38 @@ namespace MVC_dulciuri
             }
         }
 
-        //CRUD
-        public bool EditSweetType(string tipDulce, string newCandy)
+        public int FindDulciuriByTipDulce(string TipDulce)
         {
-            foreach (Dulciuri x in DulciuriList)
+            for(int i = 0; i < DulciuriList.Count; i++)
             {
-                if (x.tipDulce == tipDulce)
+                if (DulciuriList[i].Equals(TipDulce))
                 {
-                    x.tipDulce = newCandy; 
-                    return true;
+                    return i;
                 }
+            }
+            return -1;
+        }
+
+        public bool AddDulciuriinList(Dulciuri dulciuriNoi) 
+        {
+            if(FindDulciuriByTipDulce(dulciuriNoi.tipDulce)==-1)
+            {
+                this.DulciuriList.Add(dulciuriNoi); 
+                return true;
+            }
+        return false;
+        }
+        
+        public bool RemoveDulciuriByDenumire(Dulciuri stergeDulciuri)
+        {
+            if(FindDulciuriByTipDulce(stergeDulciuri.tipDulce) == -1)
+            {
+                DulciuriList.RemoveAt(FindDulciuriByTipDulce(stergeDulciuri.tipDulce));
+                return true;
             }
             return false;
         }
+
+        //View
     }
 }
