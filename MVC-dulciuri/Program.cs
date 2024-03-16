@@ -17,7 +17,5 @@ internal class Program
 
         service.AfisareDulciuri();
 
-        bool j = service.RemoveDulciuriByDenumire(Produs1);
-        Console.WriteLine(j);
     }
 }

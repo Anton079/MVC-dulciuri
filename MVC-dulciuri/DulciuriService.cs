@@ -77,16 +77,94 @@ namespace MVC_dulciuri
         return false;
         }
         
-        public bool RemoveDulciuriByDenumire(Dulciuri stergeDulciuri)
+        public bool RemoveDulciuriByDenumire(string dulceCautat)
         {
-            if(FindDulciuriByTipDulce(stergeDulciuri.tipDulce) == -1)
+            int poz = FindDulciuriByTipDulce(dulceCautat);
+            if (poz != -1)
             {
-                DulciuriList.RemoveAt(FindDulciuriByTipDulce(stergeDulciuri.tipDulce));
+                DulciuriList.RemoveAt(poz);
                 return true;
+
             }
             return false;
         }
 
         //View
+
+        public int FindDulceByPrice(int dulcePrice)
+        {
+            for (int i = 0; i < DulciuriList.Count; i++)
+            {
+                if (DulciuriList[i].pret == dulcePrice)
+                {
+                    Console.WriteLine(i);
+                    return 1;
+                }
+            }
+            return -1;
+        }
+
+        public bool BuyDulciuri(string DulciuriDorite)
+        {
+            for (int i = 0; i < DulciuriList.Count; i++)
+            {
+                if (DulciuriList[i].tipDulce == DulciuriDorite)
+                {
+                    DulciuriList.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool RemoveCameraByDenumire(string dulcCautata)
+        {
+            int DulceCautat = FindDulciuriByTipDulce(dulcCautata);
+            if (DulceCautat != -1)
+            {
+                DulciuriList.RemoveAt(DulceCautat);
+                return true;
+
+            }
+            return false;
+        }
+
+        public bool AddDulciuriInList(Dulciuri DulciuriNoi)
+        {
+            if (FindDulciuriByTipDulce(DulciuriNoi.tipDulce) != -1)
+            {
+                this.DulciuriList.Add(DulciuriNoi);
+                return true;
+            }
+            return false;
+        }
+
+        public bool EditDulciuriDenumire(string dulciuriAles, string newName)
+        {
+            foreach (Dulciuri x in DulciuriList)
+            {
+                if (x.tipDulce == dulciuriAles)
+                {
+                    x.tipDulce = newName;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EditDulciuriPret(string dulciuriAles, int newPrice)
+        {
+            foreach (Dulciuri x in DulciuriList)
+            {
+                if (x.tipDulce == dulciuriAles)
+                {
+                    x.pret = newPrice;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }
