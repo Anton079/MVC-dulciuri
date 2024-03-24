@@ -8,7 +8,12 @@ namespace MVC_dulciuri
 {
     public class View
     {
-         DulciuriService dulciuriService = new DulciuriService();
+        private DulciuriService _dulciuriService;
+
+        public View()
+        {
+            _dulciuriService = new DulciuriService();
+        }
 
         public void Meniu()
         {
@@ -26,7 +31,7 @@ namespace MVC_dulciuri
         public void Play()
         {
             bool running = true;
-            dulciuriService.LoadData();
+            _dulciuriService.LoadData();
 
             while (running)
             {
@@ -36,7 +41,7 @@ namespace MVC_dulciuri
                 switch (alegere)
                 {
                     case "1":
-                        dulciuriService.AfisareDulciuri();
+                        _dulciuriService.AfisareDulciuri();
                         break;
 
                     case "2":
@@ -72,7 +77,7 @@ namespace MVC_dulciuri
             Console.WriteLine("La ce pret doriti dulcurile?");
             int dulciuriPrice = Int32.Parse(Console.ReadLine());
 
-            if (dulciuriService.FindDulceByPrice(dulciuriPrice) != -1)
+            if (_dulciuriService.FindDulceByPrice(dulciuriPrice) != -1)
             {
                 Console.WriteLine("Avem la acest pret!");
 
@@ -88,10 +93,10 @@ namespace MVC_dulciuri
         public void BuyDulciuri()
         {
             Console.WriteLine("Ce dulciuri doriti sa cumparati din lista de mai jos?");
-            dulciuriService.AfisareDulciuri();
+            _dulciuriService.AfisareDulciuri();
             string dulciuriDorite = Console.ReadLine();
 
-            if (dulciuriService.BuyDulciuri(dulciuriDorite) != false)
+            if (_dulciuriService.BuyDulciuri(dulciuriDorite) != false)
             {
                 Console.WriteLine("Dulciurile au fost achizitionate cu succes!");
             }
@@ -123,12 +128,12 @@ namespace MVC_dulciuri
         public void StergereaUnuiDUlce()
         {
             Console.WriteLine("Din lista de mai jos de dulciuri ce doiriti sa stergeti");
-            dulciuriService.AfisareDulciuri();
+            _dulciuriService.AfisareDulciuri();
             string dulceDorit = Console.ReadLine();
 
-            if (dulciuriService.FindDulciuriByTipDulce(dulceDorit) != -1)
+            if (_dulciuriService.FindDulciuriByTipDulce(dulceDorit) != -1)
             {
-                dulciuriService.RemoveDulciuriByDenumire(dulceDorit);
+                _dulciuriService.RemoveDulciuriByDenumire(dulceDorit);
                 Console.WriteLine("Dulcele a fost sters!");
             }
             else
@@ -146,11 +151,11 @@ namespace MVC_dulciuri
             Console.WriteLine("Care sa fie noua denumire?");
             string newName = Console.ReadLine();
 
-            int pozitie = dulciuriService.FindDulciuriByTipDulce(dulceModi);
+            int pozitie = _dulciuriService.FindDulciuriByTipDulce(dulceModi);
 
             if (pozitie != -1)
             {
-                if (dulciuriService.EditDulciuriDenumire(dulceModi, newName))
+                if (_dulciuriService.EditDulciuriDenumire(dulceModi, newName))
                 {
                     Console.WriteLine("Dulcele a fost modificata cu succes");
                 }
@@ -169,11 +174,11 @@ namespace MVC_dulciuri
             Console.WriteLine("Care sa fie noul pret?");
             int newPrice = Int32.Parse(Console.ReadLine());
 
-            int pozitie = dulciuriService.FindDulciuriByTipDulce(dulceModi);
+            int pozitie = _dulciuriService.FindDulciuriByTipDulce(dulceModi);
 
             if (pozitie != -1)
             {
-                if (dulciuriService.EditDulciuriPret(dulceModi, newPrice))
+                if (_dulciuriService.EditDulciuriPret(dulceModi, newPrice))
                 {
                     Console.WriteLine("Dulcele a fost modificata cu succes");
                 }

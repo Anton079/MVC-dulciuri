@@ -8,9 +8,28 @@ namespace MVC_dulciuri
 {
     public class Dulciuri
     {
-        public double pret;
-        public int gramaj;
-        public string tipDulce;
+        public double _pret;
+        public int _gramaj;
+        public string _tipDulce;
+
+        public double pret
+        {
+            get { return _pret; }
+            set { _pret = value; }
+        }
+
+        public int gramaj
+        {
+            get { return _gramaj; }
+            set { _gramaj = value; }
+        }
+
+        public string tipDulce
+        {
+            get { return _tipDulce; }
+            set { _tipDulce = value; }
+        }
+
 
         public string DulciuriInfo()
         {

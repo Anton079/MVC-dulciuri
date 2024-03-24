@@ -8,7 +8,13 @@ namespace MVC_dulciuri
 {
     public class DulciuriService
     {
-        public List <Dulciuri> DulciuriList = new List<Dulciuri>();
+        private List <Dulciuri> _DulciuriList;
+
+        public DulciuriService()
+        {
+            _DulciuriList = new List<Dulciuri>();
+            this.LoadData();
+        }
 
         public void LoadData()
         {
@@ -37,11 +43,11 @@ namespace MVC_dulciuri
             Produs5.gramaj = 300;
             Produs5.pret = 6;
 
-            this.DulciuriList.Add(Produs1);
-            this.DulciuriList.Add(Produs2);
-            this.DulciuriList.Add(Produs3);
-            this.DulciuriList.Add(Produs4);
-            this.DulciuriList.Add(Produs5);
+            this._DulciuriList.Add(Produs1);
+            this._DulciuriList.Add(Produs2);
+            this._DulciuriList.Add(Produs3);
+            this._DulciuriList.Add(Produs4);
+            this._DulciuriList.Add(Produs5);
 
         }
 
@@ -49,7 +55,7 @@ namespace MVC_dulciuri
         //CRUD
         public void AfisareDulciuri()
         {
-            foreach(Dulciuri x in DulciuriList)
+            foreach(Dulciuri x in _DulciuriList)
             {
                 Console.WriteLine(x.DulciuriInfo());
             }
@@ -57,9 +63,9 @@ namespace MVC_dulciuri
 
         public int FindDulciuriByTipDulce(string TipDulce)
         {
-            for(int i = 0; i < DulciuriList.Count; i++)
+            for(int i = 0; i < _DulciuriList.Count; i++)
             {
-                if (DulciuriList[i].Equals(TipDulce))
+                if (_DulciuriList[i].Equals(TipDulce))
                 {
                     return i;
                 }
@@ -71,7 +77,7 @@ namespace MVC_dulciuri
         {
             if(FindDulciuriByTipDulce(dulciuriNoi.tipDulce)==-1)
             {
-                this.DulciuriList.Add(dulciuriNoi); 
+                this._DulciuriList.Add(dulciuriNoi); 
                 return true;
             }
         return false;
@@ -82,7 +88,7 @@ namespace MVC_dulciuri
             int poz = FindDulciuriByTipDulce(dulceCautat);
             if (poz != -1)
             {
-                DulciuriList.RemoveAt(poz);
+                _DulciuriList.RemoveAt(poz);
                 return true;
 
             }
@@ -93,9 +99,9 @@ namespace MVC_dulciuri
 
         public int FindDulceByPrice(int dulcePrice)
         {
-            for (int i = 0; i < DulciuriList.Count; i++)
+            for (int i = 0; i < _DulciuriList.Count; i++)
             {
-                if (DulciuriList[i].pret == dulcePrice)
+                if (_DulciuriList[i].pret == dulcePrice)
                 {
                     Console.WriteLine(i);
                     return 1;
@@ -106,11 +112,11 @@ namespace MVC_dulciuri
 
         public bool BuyDulciuri(string DulciuriDorite)
         {
-            for (int i = 0; i < DulciuriList.Count; i++)
+            for (int i = 0; i < _DulciuriList.Count; i++)
             {
-                if (DulciuriList[i].tipDulce == DulciuriDorite)
+                if (_DulciuriList[i].tipDulce == DulciuriDorite)
                 {
-                    DulciuriList.RemoveAt(i);
+                    _DulciuriList.RemoveAt(i);
                     return true;
                 }
             }
@@ -122,7 +128,7 @@ namespace MVC_dulciuri
             int DulceCautat = FindDulciuriByTipDulce(dulcCautata);
             if (DulceCautat != -1)
             {
-                DulciuriList.RemoveAt(DulceCautat);
+                _DulciuriList.RemoveAt(DulceCautat);
                 return true;
 
             }
@@ -133,7 +139,7 @@ namespace MVC_dulciuri
         {
             if (FindDulciuriByTipDulce(DulciuriNoi.tipDulce) != -1)
             {
-                this.DulciuriList.Add(DulciuriNoi);
+                this._DulciuriList.Add(DulciuriNoi);
                 return true;
             }
             return false;
@@ -141,7 +147,7 @@ namespace MVC_dulciuri
 
         public bool EditDulciuriDenumire(string dulciuriAles, string newName)
         {
-            foreach (Dulciuri x in DulciuriList)
+            foreach (Dulciuri x in _DulciuriList)
             {
                 if (x.tipDulce == dulciuriAles)
                 {
@@ -154,7 +160,7 @@ namespace MVC_dulciuri
 
         public bool EditDulciuriPret(string dulciuriAles, int newPrice)
         {
-            foreach (Dulciuri x in DulciuriList)
+            foreach (Dulciuri x in _DulciuriList)
             {
                 if (x.tipDulce == dulciuriAles)
                 {
